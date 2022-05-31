@@ -1,0 +1,9 @@
+{% if week_list %}
+    <ul>
+        {% for week in week_list %}
+            <li><a href="{% url 'week' week.id %}"/>Week {{ week.week_no }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>no weeks currently available</p>
+{% endif %}

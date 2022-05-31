@@ -1,0 +1,9 @@
+{% if series_list %}
+    <ul>
+        {% for series in series_list %}
+            <li><a href="{% url 'series' series.id %}">{{ series.series_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No series yet available</p>
+{% endif %}

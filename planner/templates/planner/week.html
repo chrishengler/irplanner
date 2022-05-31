@@ -1,0 +1,9 @@
+{% if session_list %}
+<ul>
+    {% for session in session_list %}
+    <li>session at {{ session.time }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>no sessions currently available</p>
+{% endif %}
