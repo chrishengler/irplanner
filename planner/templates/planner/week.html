@@ -1,8 +1,19 @@
-{% if session_list %}
+{% if session_matrix %}
+All times in GMT
 <ul>
-    {% for session in session_list %}
-    <li>session at {{ session.time }}</li>
+    <table border="1">
+    {% for timeslot in session_matrix %}
+        <tr>
+        {% for session in timeslot %}
+            <td><b>{{ session.day_name }}, {{ session.time }}</b>
+                {% for racer in session.racer_set.all %}
+                    <p>{{ racer.name }}</p>
+                {% endfor %}
+            </td>
+        {% endfor %}
+        </tr>
     {% endfor %}
+    </table>
 </ul>
 {% else %}
 <p>no sessions currently available</p>

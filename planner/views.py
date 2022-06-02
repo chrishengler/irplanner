@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import Http404
 from django.template import loader
 
-from .models import Series, Week
+from .models import Series, Session, Week
 
 
 def index(request):
@@ -25,8 +25,13 @@ def series(request, series_id):
 
 def week(request, week_id):
     w = get_object_or_404(Week, pk=week_id)
-    session_list = w.session_set.all()
+    session_list = w.session_set.all().order_by('time')
+    session_matrix = list[list[Session]]()
+    for day in range(0, 7):
+        session_matrix.append(list[Session]())
+    for session in session_list:
+        session_matrix[session.day].append(session)
     context = {
-        'session_list': session_list
+        'session_matrix': session_matrix
     }
     return render(request, 'planner/week.html', context)
